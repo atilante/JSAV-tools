@@ -1,11 +1,12 @@
 # JSAV tools
 
 This repository contains tools for studying misconceptions in visual algorithm
-simulation exercises implemented with JSAV <http://jsav.io/> and the A+ LMS
-<https://apluslms.github.io/>. They are part of Artturi Tilanterä's Master's
-Thesis "Automatic detection of misconceptions in visual algorithm simulation
-exercises" done for Department of Computer Science at Aalto University
-<https://www.aalto.fi> on years 2019-2020.
+simulation exercises implemented with [JSAV](http://jsav.io/) and the
+[A+ LMS](https://apluslms.github.io/). They are part of Artturi Tilanterä's
+Master's Thesis "Automatic detection of misconceptions in visual algorithm
+simulation exercises" done for [Department of Computer Science at Aalto
+University](https://www.aalto.fi/en/department-of-computer-science) on years
+2019-2020.
 
 Visual algorithm simulation is a type of computerised, interactive exercise for
 teaching theory of programming (algorithms). The student performs the steps of a
@@ -13,8 +14,8 @@ specified algorithm with given input data by interacting with a visual
 representation of a data structure. After completing the exercise, they receive
 immediate, automatic feedback on the correctness of their simulation steps.
 
-The OpenDSA electronic textbook project contains visual algorithm simulation
-exercises. <https://opendsa-server.cs.vt.edu/> These exercises are implemented
+The [OpenDSA electronic textbook project](https://opendsa-server.cs.vt.edu/)
+contains visual algorithm simulation exercises. These exercises are implemented
 with the JavaScript Algorithm Visualisation library (JSAV).
 
 Contact: artturi.dot.tilantera at aalto.dot.fi
@@ -38,13 +39,14 @@ Contact: artturi.dot.tilantera at aalto.dot.fi
 
 
 License files:
-MIT:        doc/licenses/MIT-license.txt
-GNU GPLv3:  doc/licenses/gpl-3.0.txt
+- [MIT](doc/licenses/MIT-license.txt)
+- [GNU GPLv3](doc/licenses/gpl-3.0.txt)
 
 ## Software requirements
 
 JSAV downloader requires:
 - Python 3 <http://www.python.org>. (Python 3.5.2 tested)
+- Python libraries: requests; `pip install requests`
 - A running A+ LMS instance <https://apluslms.github.io/> and teacher's access
   rights to a course to download exercise submissions.
 
@@ -87,8 +89,6 @@ against known misconceptions.
 
 
 ## References
-
-
 
 The following scientific publications are relevant to the topic.
 
