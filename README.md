@@ -27,18 +27,13 @@ Contact: artturi.dot.tilantera at aalto.dot.fi
 |                 | inspector/lib/jquery-ui.min.js    |           |
 |                 | inspector/lib/jquery.min.js       |           |
 |                 | inspector/lib/jquery.transit.js   |           |
-| --------------- | --------------------------------- | --------- |
 | JSAV            | inspector/css/JSAV.css            | MIT       |
 |                 | inspector/lib/JSAV.js             |           |
-| --------------- | --------------------------------- | --------- |
 | JSAV downloader | JSAV-downloader.py                | GNU GPLv3 |
-| --------------- | --------------------------------- | --------- |
 | JSAV inspector  | inspector/css/JSAV-inspector.css  | GNU GPLv3 |
 |                 | inspector/JSAV-inspector.html     |           |
 |                 | inspector/JSAV-inspector.js       |           |
-| --------------- | --------------------------------- | --------- |
 | JSAV matcher    | matcher/*                         | GNU GPLv3 |
-| --------------- | --------------------------------- | --------- |
 | Raphaël         | inspector/lib/raphael.js          | MIT       |
 
 
