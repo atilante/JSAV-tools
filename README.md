@@ -21,6 +21,8 @@ Contact: artturi.dot.tilantera at aalto.dot.fi
 
 ## JSAV downloader
 
+File: JSAV-downloader.py
+
 This tool retrieves JSAV exercise submissions from the A+ LMS.
 It is a Python script where each \emph{exercise instance} are specified
 manually. The exercise instance is a tuple $(x, y)$, where $x$ is the
@@ -28,7 +30,23 @@ type of the exercise, such as Build-heap, $y$ is the course instance, such as
 ''2016'' for the respective year. Submissions from each exercise instance are
 downloaded into their own JSON file.
 
+## JSAV player
+
+File: inspector/JSAV-inspector.html
+
+This tool creates slideshows of exercise submissions. It runs in
+a web browser as single, static web page, meaning that no server setup is
+needed. The application is implemented in HTML5, CSS and JavaScript and it
+utilises the JSAV library. The tool can open a JSON file produced with the
+JSAV downloader and display students' solutions to the Build-heap exercise.
+
+## JSAV matcher
+
+File: matcher/matcher.py
+
 ## References
+
+
 
 The following scientific publications are relevant to the topic.
 

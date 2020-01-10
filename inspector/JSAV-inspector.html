@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>JSAV inspector</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/JSAV.css" media="screen" title="no title">
+  <link rel="stylesheet" href="css/JSAV-inspector.css">
+
+  <script src="lib/jquery.min.js"></script>
+
+  <!-- jquery-ui is needed for graph algorithm visualisations -->
+  <script src="lib/jquery-ui.min.js"></script>
+
+  <script src="lib/jquery.transit.js"></script>
+  <script src="lib/raphael.js"></script>
+  <script src="lib/JSAV.js"></script>
+  <script src="JSAV-inspector.js"></script>
+</head>
+<body>
+  <h1>JSAV inspector</h1>
+
+  <div id="fileSelector">File:
+  <input id="jsavRecordingFile" type="file">
+  <button id="jsavRecordingFileOk">Load</button>
+    <div id="fileInfoDiv">
+      <pre id="fileInfo"></pre>
+    </div>
+  </div>
+
+  <p id="submissionSelector">
+    Submission:
+    <button id="previousSubmission" disabled>&lt;</button>
+    <input id="submissionNumber" type="text" disabled> /
+    <span id="submissionCount">&nbsp;</span>
+    <button id="nextSubmission" disabled>&gt;</button>
+    <span id="submissionInfo"></span>
+  </p>
+
+  <div id="container">
+    <div class="jsavcontrols"></div>
+    <div>Step <span class="jsavcounter"></span></div>
+    <p class="jsavoutput jsavline"></p>
+    <div id="avcanvas" class="jsavcanvas">
+    </div>
+  </div>
+
+  <p>Keyboard shortcuts:<br />
+  Up / Down: previous / next submission<br />
+  Left / Right: previous / next step<br />
+  Home / End: first / last step
+  </p>
+
+
+</body>
+</html>

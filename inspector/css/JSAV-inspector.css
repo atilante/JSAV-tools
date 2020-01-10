@@ -1,0 +1,57 @@
+#container {
+  width: 825px;
+  min-height: 600px;
+  border: 1px solid black;
+}
+
+#decrement {
+  float: left;
+}
+
+#fileSelector {
+  /* border: 1px solid #AAA; */
+  min-width: 850px;
+  margin-bottom: 0px;
+}
+
+#fileInfo {
+  min-width: 850px;
+  font-size: 90%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#fileInfoDiv {
+  margin: 1px;
+  padding: 0px;
+  border: 1px solid black;
+  min-height: 3ex;
+  width: 825px;
+  font-size: 90%;
+}
+
+#procontrols {
+  text-align: center;
+}
+
+#submissionNumber {
+  width: 8ex;
+  align: right;
+}
+
+.error {
+  background-color: #FCC;
+}
+
+.success {
+  background-color: #CFC;
+}
+
+.playerhighlight {
+  background-color: #ffb134;
+  color: black;
+}
+
+#infobox {
+  font-size: 10pt;
+}

@@ -1,0 +1,76 @@
+JSAV Inspector file format specification
+========================================
+
+Script JSAV-downloader.py downloads JSAV exercise data from A+. It stores all
+submissions of an exercise into a JSON file. The structure of the file is
+the following:
+
+{
+  "application" : "JSAV Inspector",
+  "version"     : 1,
+  "metadata"    : {
+    "year": 2018,
+    "type": "buildheap",
+    "course_code": "CS-A1141",
+    "course_instance": "2018",
+    "course_name": "Tietorakenteet ja algoritmit Y",
+    "id": 18883,
+    "max_submissions": 10,
+    "max_points": 400,
+    "longname": "Heap build",
+    "submissions_url": "https://plus.cs.aalto.fi/api/v2/exercises/18883/submissions/"
+  },
+  "submissions" : [
+    {
+      "id" : 2093373,
+      "points" : 5,
+      "max_points" : 5,
+      "recording" : [ ... ]
+    },
+    {
+      "id" : 2093372,
+      "points" : 4,
+      "max_points" : 4,
+      "recording" : [ ... ]
+    }
+  ]
+}
+
+
+Description of fields
+---------------------
+
+application: must be "JSAV Inspector"
+version    : currently 1
+
+metadata:
+  year            : year of the course, or the name of the course instance
+  type            : See Section "Exercise types"
+  course_code     : course code of the exercise
+  course_instance : course instance of the exercise, usually a year
+  course_name     : course name of the exercise
+  id              : Unique identifier of the exercise in the A+ API
+  max_submissions : maximum number of submissions for the exercise
+  max_points      : maximum points of the exercise shown in A+
+  longname        : display name of the exercise
+  submissions_url : A+ API url for the submissions of the exercise
+
+submissions:      list of exercise submissions
+  id              : Unique identifier of the submission in the A+ API
+  points          : Points given by the JSAV exercise
+  max_points      : Maximum points given by the JSAV exercise
+  recording       : the JSAV exercise recording (steps performed by the student)
+
+
+Exercise types
+--------------
+
+JSAV Inspector uses the following exercise type strings which refer to the
+JSAV-based exercises in the OpenDSA electronic textbook
+
+
+Type         OpenDSA reference
+..................................................
+buildheap    AV/Binary/heapbuildPRO.html
+dijkstra     AV/Development/DijkstraPE.html
+quicksort    AV/Development/quicksort2PRO.html
