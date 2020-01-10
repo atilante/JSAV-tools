@@ -1,6 +1,4 @@
 import copy
-import math
-from dtw import dtw
 
 class BuildHeapMatcher:
 
@@ -20,8 +18,6 @@ class BuildHeapMatcher:
             (800, 'Inorder',            (3, 1, 4, 0, 2))
         )
 
-        self.heap_array_size = 10
-
         # List of heapify algorithms. These are used together with loop
         # variants.
         self.heapify_algorithms = (
@@ -40,8 +36,6 @@ class BuildHeapMatcher:
             (9, 'Wrong-duplicate', self.wrong_duplicate),
             (10, 'Path-Bubblesort', self.path_bubblesort)
         )
-        
-        
 
     def describe_variants(self):
         print("The following Build-heap variants have been defined.")
@@ -171,10 +165,6 @@ class BuildHeapMatcher:
                         len_states = len(states)
                     elif options['similarity'] == 'lcs':
                         m = self.lcs_similarity(algo_swaps, swaps)
-                        len_algo = len(algo_swaps)
-                        len_states = len(swaps)
-                    elif options['similarity'] == 'dtw1':
-                        m = self.dtw_similarity(algo_swaps, swaps, 1)
                         len_algo = len(algo_swaps)
                         len_states = len(swaps)
                     else:
@@ -447,31 +437,8 @@ class BuildHeapMatcher:
                     break
                 j += 1
         return i
-    
-    def dtw_similarity(self, recorded_swaps, algo_swaps, distance_func_code):
-        """Matches a sequence of swaps in the exercise recording against
-        a sequence of swaps performed by some algorithm variant
-        using Dynamic Time Warping"""
-        
-        # Upper bound for DTW value:
-        # Denote size of heap array by N. When comparing two swaps, they are
-        # pair of pair of integers: (s, t), (u, v) such that
-        # 0 <= s, t, u, v < N. If the distance function is
-        # sqrt((s-u)**2 + (t-v)**2), then its maximum value is less than
-        # sqrt(N**2 + N**2) = N*sqrt(2) <= 2 * N.
-        # Multiply this by the length of the longer sequence and you have an
-        # upper bound. 
-        
-        longest_sequence = 100 # arbitrary large value
-        upper_bound = 2 * self.heap_array_size * longest_sequence
-        
-        def d1(u, v):
-            # u and v are swaps
-            return math.sqrt( (u[0] - v[0]) ** 2 + (u[1] - v[1]) ** 2)
-        
-        if (distance_func_code == 1):
-            return upper_bound - dtw(recorded_swaps, algo_swaps, d1)
-    
+
+
     #
     # Heapify algorithm variants
     #

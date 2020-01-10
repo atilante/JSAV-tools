@@ -187,10 +187,8 @@ if __name__ == "__main__":
 #         {'similarity': 'lcs', 'Jaccard': True, 'threshold': 0.8},
 #           {'similarity': 'states', 'Jaccard': False, 'threshold': 3,
 #            'verbosity' : 1}        
-#          {'similarity': 'lcs', 'Jaccard': True, 'threshold': 0.8,
-#           'verbosity' : 1}
-          {'similarity': 'dtw1', 'Jaccard': False, 'threshold': 0,
-           'verbosity' : 0 }    
+          {'similarity': 'lcs', 'Jaccard': True, 'threshold': 0.8,
+           'verbosity' : 1}        
         ]
     print_classes = True
     

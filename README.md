@@ -1,11 +1,11 @@
 # JSAV tools
 
 This repository contains tools for studying misconceptions in visual algorithm
-simulation exercises implemented with JSAV (http://jsav.io/) and the A+ LMS
-(https://apluslms.github.io/). They are part of Artturi Tilanterä's Master's
+simulation exercises implemented with JSAV <http://jsav.io/> and the A+ LMS
+<https://apluslms.github.io/>. They are part of Artturi Tilanterä's Master's
 Thesis "Automatic detection of misconceptions in visual algorithm simulation
-exercises" done for Department of Computer Science at Aalto University on years
-2019-2020.
+exercises" done for Department of Computer Science at Aalto University
+<https://www.aalto.fi> on years 2019-2020.
 
 Visual algorithm simulation is a type of computerised, interactive exercise for
 teaching theory of programming (algorithms). The student performs the steps of a
@@ -14,23 +14,62 @@ representation of a data structure. After completing the exercise, they receive
 immediate, automatic feedback on the correctness of their simulation steps.
 
 The OpenDSA electronic textbook project contains visual algorithm simulation
-exercises. https://opendsa-server.cs.vt.edu/ These exercises are implemented
+exercises. <https://opendsa-server.cs.vt.edu/> These exercises are implemented
 with the JavaScript Algorithm Visualisation library (JSAV).
 
 Contact: artturi.dot.tilantera at aalto.dot.fi
+
+## Licensing
+
+Software          File(s)                             License
+----------------------------------------------------------------------
+jQuery            inspector/css/jquery-ui.min.css     MIT
+                  inspector/lib/jquery-ui.min.js
+                  inspector/lib/jquery.min.js
+                  inspector/lib/jquery.transit.js
+----------------------------------------------------------------------
+JSAV              inspector/css/JSAV.css              MIT
+                  inspector/lib/JSAV.js
+----------------------------------------------------------------------                  
+JSAV downloader   JSAV-downloader.py                  GNU GPLv3
+----------------------------------------------------------------------
+JSAV inspector    inspector/css/JSAV-inspector.css
+                  inspector/JSAV-inspector.html
+                  inspector/JSAV-inspector.js
+----------------------------------------------------------------------
+JSAV matcher      matcher/*
+----------------------------------------------------------------------
+Raphaël           inspector/lib/raphael.js            MIT
+
+License files:
+MIT:        doc/licenses/MIT-license.txt
+GNU GPLv3:  doc/licenses/gpl-3.0.txt
+
+## Software requirements
+
+JSAV downloader requires:
+- Python 3 <http://www.python.org>. (Python 3.5.2 tested)
+- A running A+ LMS instance <https://apluslms.github.io/> and teacher's access
+  rights to a course to download exercise submissions.
+
+JSAV matcher requires Python 3 similar to JSAV downloader.
+
+JSAV inspector requires a web browser with HTML5, CSS and JavaScript
+support. It has been tested with Mozilla Firefox 71.0.
+
 
 ## JSAV downloader
 
 File: JSAV-downloader.py
 
 This tool retrieves JSAV exercise submissions from the A+ LMS.
-It is a Python script where each \emph{exercise instance} are specified
+It is a Python script where each *exercise instance* is specified
 manually. The exercise instance is a tuple $(x, y)$, where $x$ is the
 type of the exercise, such as Build-heap, $y$ is the course instance, such as
 ''2016'' for the respective year. Submissions from each exercise instance are
 downloaded into their own JSON file.
 
-## JSAV player
+## JSAV inspector
 
 File: inspector/JSAV-inspector.html
 
@@ -40,9 +79,16 @@ needed. The application is implemented in HTML5, CSS and JavaScript and it
 utilises the JSAV library. The tool can open a JSON file produced with the
 JSAV downloader and display students' solutions to the Build-heap exercise.
 
+![Screenshot of JSAV inspector](doc/jsav-inspector-buildheap.png "")
+
 ## JSAV matcher
 
-File: matcher/matcher.py
+File: matcher/*
+
+This tool reads a file created by the JSAV downloader. It matches submissions
+against known misconceptions.
+
+
 
 ## References
 
