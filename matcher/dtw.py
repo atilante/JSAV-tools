@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import array
 
 def dtw(X, Y, d, return_array=False):

@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 # JSAV exercise downloader for A+ LMS.
 # Language: Python 3.5
 #
@@ -143,7 +146,8 @@ class ExerciseDownloader:
 
         result['submission_id'] = json_data['id']
         # result['username'] = json_data['submitters'][0]['username']
-        # result['student_id'] = json_data['submitters'][0]['student_id']
+        result['submitter_id'] = json_data['submitters'][0]['id']
+        #result['student_id'] = json_data['submitters'][0]['student_id']
         # result['email'] = json_data['submitters'][0]['email']
         # result['submission_time'] = json_data['submission_time']
         result['status'] = json_data['status']
@@ -270,6 +274,7 @@ class ExerciseDownloader:
 
                 json_file.write('  ' + comma + '{\n'
                 '    "id" : ' + str(submission['submission_id']) + ',\n'
+                '    "submitter" : ' + str(submission['submitter_id']) + ',\n'
                 '    "points" : ' + str(submission['jsav_points']) + ',\n'
                 '    "max_points" : ' + str(submission['jsav_max_points']) + ',\n'
                 '    "recording" : ' + submission['jsav_recording'] + '\n}')
@@ -337,13 +342,13 @@ else:
     exercises = [
         # Hardcoded exercise identifiers. These must read manually from the
         # A+ api and then copypasted here.
-        #ExerciseDL(18883, JSAVType.buildheap, 2018),
+        ExerciseDL(18883, JSAVType.buildheap, 2018),
         #ExerciseDL(18857, JSAVType.quicksort, 2018),
         #ExerciseDL(18938, JSAVType.dijkstra, 2018)
-        # ExerciseDL(13212, JSAVType.buildheap, 2017),
+         ExerciseDL(13212, JSAVType.buildheap, 2017),
         # ExerciseDL(14333, JSAVType.quicksort, 2017),
         # ExerciseDL(13263, JSAVType.dijkstra, 2017),
-        # ExerciseDL(6198, JSAVType.buildheap, 2016),
+        ExerciseDL(6198, JSAVType.buildheap, 2016),
         # ExerciseDL(11700, JSAVType.quicksort, 2017),
         # ExerciseDL(6636, JSAVType.dijkstra, 2017)
         ExerciseDL(22488, JSAVType.buildheap, 2019),

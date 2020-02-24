@@ -39,6 +39,11 @@
   align: right;
 }
 
+#submissionId {
+  width: 10ex;
+  align: right;
+}
+
 .error {
   background-color: #FCC;
 }

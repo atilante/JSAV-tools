@@ -33,7 +33,8 @@
     $("#previousSubmission").click(handleSubmissionSelect);
     $("#nextSubmission").click(handleSubmissionSelect);
     $("#submissionNumber").change(handleSubmissionSelect);
-    $(document).keydown(handleKeyDown);
+    $("#submissionId").change(handleSubmissionSelect);
+    $(document).keydown(handleKeyPress);
   });
 
   // Validates an exercise file and writes feedback into the #fileInfo box.
@@ -44,7 +45,7 @@
   // Returns:
   //   (boolean): whether the file has submissions that can be inspected
 
-  function validateFile(exerciseData) {
+  function isValidJsavInspectorFile(exerciseData) {
     const r = exerciseData;
 
     // Validate file version
@@ -99,6 +100,7 @@
       $("#submissionNumber").attr("value", "1");
     }
     $("#submissionNumber").attr("disabled", false);
+    $("#submissionId").attr("disabled", false);
     $("#submissionCount").html(s.length);
     $("#submissionInfo").html("");
 
@@ -114,9 +116,9 @@
       var reader = new FileReader();
       reader.onload = function(event_) {
         exercise = JSON.parse(event_.target.result);
-        var valid = validateFile(exercise);
-        if (valid) {
+        if (isValidJsavInspectorFile(exercise)) {
           initSubmissionSelector(exercise);
+          createSubmissionIdIndex();
         }
       }
       reader.onerror = function(event_) {
@@ -125,6 +127,18 @@
       }
       reader.readAsText(file, "UTF-8");
     }
+  }
+
+  // Creates an index (dictionary, hash table) from submission id to relative
+  // number of submission in the file. This enables fast search by submission
+  // id.
+  function createSubmissionIdIndex() {
+    let byId = {};
+    for (let i = 0; i < exercise.submissions.length; i++) {
+      let s = exercise.submissions[i];
+      byId[s.id] = i;
+    }
+    exercise.submissions.byId = byId;
   }
 
   // Click handler for previous / next / go to submission
@@ -170,12 +184,29 @@
         openSubmission(currentSubmission);
       }
     }
+    else if (id === "submissionId") {
+      const parsed = parseInt(ev.target.value, 10);
+      const exerciseIndex = exercise.submissions.byId[parsed];
+      if (exerciseIndex === undefined) {
+        // Reset input
+        $("#submissionId").attr("value",
+          exercise.submissions[currentSubmission].id)
+      }
+      else {
+        currentSubmission = exerciseIndex;
+        $("#submissionNumber").attr("value", currentSubmission + 1);
+        $("#previousSubmission").attr("disabled", (currentSubmission === 0));
+        $("#nextSubmission").attr("disabled",
+          (currentSubmission === exercise.submissions.length - 1));
+        openSubmission(exerciseIndex);
+      }
+    }
   }
 
   // Keyboard press handler
   // Parameters:
   //   ev: browser event
-  function handleKeyDown(ev) {
+  function handleKeyPress(ev) {
     // näppis, nuoli oikealle: $('.jsavforward').click();
     // näppis, nuoli vasemmalle: $('.jsavbackward').click();
     // näppis, home: $('.jsavbegin').click();
@@ -215,11 +246,14 @@
   function openSubmission(index) {
     const s = exercise.submissions[index];
     const score = parseInt(s.points / s.max_points * 100);
-    $("#submissionInfo").html("id: " + s.id + " score: " + score + "%");
+    $("#submissionId").attr("value", s.id)
+    $("#submissionInfo").html(" score: " + s.points + "/" + s.max_points +
+      " (" + score + "%)");
 
     if (exerciseType === 'buildheap') {
       createBuildHeapAV(s.recording)
     }
+    currentSubmission = index;
   }
 
   function parseBuildHeapRecording(recording) {

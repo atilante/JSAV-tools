@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 # Prints binary tree representations of build-heap swap sequences
 
 class BuildHeapPrinter:

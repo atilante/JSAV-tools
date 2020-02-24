@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 def path_bubblesort(A, i):
     """Min-heapify: execute Bubblesort on the path from current node to
     root."""
