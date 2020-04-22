@@ -3,8 +3,8 @@
 This repository contains tools for studying misconceptions in visual algorithm
 simulation exercises implemented with [JSAV](http://jsav.io/) and the
 [A+ LMS](https://apluslms.github.io/). They are part of Artturi Tilanterä's
-Master's Thesis "Automatic detection of misconceptions in visual algorithm
-simulation exercises" done for [Department of Computer Science at Aalto
+Master's Thesis "Towards Automatic Advice in Visual Algorithm Simulation"
+for [Department of Computer Science at Aalto
 University](https://www.aalto.fi/en/department-of-computer-science) on years
 2019-2020.
 
