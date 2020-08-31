@@ -8,7 +8,7 @@ Created on 4 Dec 2019
 '''
 import copy
 import unittest
-from buildheap import BuildHeapMatcher
+from buildheap import BuildHeapMatcher, MainLoopGenerator
 from dtw import dtw
 
 class TestBuildHeapMatcher(unittest.TestCase):
@@ -1719,6 +1719,46 @@ class TestDTW(unittest.TestCase):
 
             self.assertAlmostEqual(g[i], expected_g[i],
                 msg = (msg.format(i)))
+
+class TestMainLoopGenerator(unittest.TestCase):
+    
+    def test_levels_negative_size(self):
+        g = MainLoopGenerator()
+        g.generate_levels(-2)
+        self.assertEqual(g.heap_size, 0)
+        self.assertEqual(g.levels, [])
+    
+    def test_levels_zero_size(self):
+        g = MainLoopGenerator()
+        g.generate_levels(0)
+        self.assertEqual(g.heap_size, 0)
+        self.assertEqual(g.levels, [])
+            
+    def test_levels_size_10(self):
+        g = MainLoopGenerator()
+        g.generate_levels(10)
+        self.assertEqual(g.heap_size, 10)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 9)])
+        
+    def test_level_boundary(self):
+        g = MainLoopGenerator()
+        g.generate_levels(14)
+        self.assertEqual(g.heap_size, 14)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 13)])
+        
+        g.generate_levels(15)
+        self.assertEqual(g.heap_size, 15)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14)])
+
+        g.generate_levels(16)
+        self.assertEqual(g.heap_size, 16)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14),
+            (15, 15)])
+
+        g.generate_levels(17)
+        self.assertEqual(g.heap_size, 17)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14),
+            (15, 16)])
 
 
 if __name__ == "__main__":

@@ -1474,7 +1474,40 @@ class BuildHeapMatcher:
         return True
 
 
-
+# Generates Build-heap / Heapify main loop variants
+class MainLoopGenerator:
+    
+    def __init__(self):
+        # heap levels: list of tuples (l, r) where l is the first
+        # index and r is the last index of a heap element on one
+        # level of the binary tree representation.
+        # Example: [(0, 0), (1, 2), (3, 6), (7, 14), ...]
+        self.levels = []
+        
+        # heap size for which self.levels is computed
+        self.heap_size = 0 
+        
+        
+    def generate_levels(self, N):
+        """Generates start and end indices of each level.
+        
+        Parameters:
+        N    new heap size
+        """
+        
+        self.levels = []
+        if (N < 1):
+            self.heap_size = 0
+        else:
+            self.heap_size = N        
+                
+        level_width = 1
+        l = 0
+        while (l < N):        
+            r = min(N - 1, l + level_width - 1)        
+            self.levels.append((l, r))
+            l = r + 1
+            level_width *= 2
 
 if __name__ == "__main__":
     m = BuildHeapMatcher()
