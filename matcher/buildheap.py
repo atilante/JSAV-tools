@@ -1485,7 +1485,10 @@ class MainLoopGenerator:
         self.levels = []
         
         # heap size for which self.levels is computed
-        self.heap_size = 0 
+        self.heap_size = 0
+        
+        # highest index of a node which has children
+        self.last_i = 0                 
         
         
     def generate_levels(self, N):
@@ -1500,15 +1503,25 @@ class MainLoopGenerator:
             self.heap_size = 0
         else:
             self.heap_size = N        
+
+        self.last_i = self.heap_size // 2 - 1
                 
         level_width = 1
         l = 0
-        while (l < N):        
-            r = min(N - 1, l + level_width - 1)        
+        while (l <= self.last_i):        
+            r = min(self.last_i, l + level_width - 1)        
             self.levels.append((l, r))
             l = r + 1
             level_width *= 2
 
+    def correct(self):        
+        return [i for i in range(self.last_i, -1, -1)]
+    
+    def down_lr(self):
+        return [i for i in range(self.last_i + 1)]
+    
+    
+        
 if __name__ == "__main__":
     m = BuildHeapMatcher()
 

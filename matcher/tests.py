@@ -1734,32 +1734,82 @@ class TestMainLoopGenerator(unittest.TestCase):
         self.assertEqual(g.heap_size, 0)
         self.assertEqual(g.levels, [])
             
-    def test_levels_size_10(self):
+    def test_levels_size_10_12(self):
+        #              [0]
+        #        ┌──────┴───┐      Nodes [5]..[9] are leaves
+        #       [1]        [2]
+        #    ┌───┴────┐   ┌─┴─┐
+        #   [3]      [4] [5] [6]
+        #  ┌─┴─┐   ┌──┘
+        # [7] [8] [9]    
         g = MainLoopGenerator()
         g.generate_levels(10)
         self.assertEqual(g.heap_size, 10)
-        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 9)])
+        self.assertEqual(g.last_i, 4)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 4)])
+
+        #              [0]
+        #        ┌──────┴───┐     Nodes [5]..[10] are leaves
+        #       [1]        [2]
+        #    ┌───┴────┐   ┌─┴─┐
+        #   [3]      [4] [5] [6]  
+        #  ┌─┴─┐   ┌──┴─┐
+        # [7] [8] [9] [10]                                        
+        g.generate_levels(11)
+        self.assertEqual(g.heap_size, 11)
+        self.assertEqual(g.last_i, 4)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 4)])
+
+        #                [0]
+        #        ┌────────┴──────┐     Nodes [6]..[11] are leaves
+        #       [1]             [2]
+        #    ┌───┴────┐        ┌─┴─┐
+        #   [3]      [4]      [5] [6]  
+        #  ┌─┴─┐   ┌──┴─┐    ┌─┘
+        # [7] [8] [9] [10] [11]                                        
+        g.generate_levels(12)
+        self.assertEqual(g.heap_size, 12)
+        self.assertEqual(g.last_i, 5)
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 5)])
+
         
     def test_level_boundary(self):
+        #                [0]                Nodes [7]..[13] are leaves
+        #        ┌────────┴──────────┐
+        #       [1]                 [2]
+        #    ┌───┴────┐         ┌────┴───┐
+        #   [3]      [4]       [5]      [6]  
+        #  ┌─┴─┐   ┌──┴─┐    ┌──┴─┐    ┌─┘
+        # [7] [8] [9] [10] [11] [12] [13]
         g = MainLoopGenerator()
         g.generate_levels(14)
         self.assertEqual(g.heap_size, 14)
-        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 13)])
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6)])
         
+        #                [0]                Nodes [7]..[14] are leaves
+        #        ┌────────┴──────────┐
+        #       [1]                 [2]
+        #    ┌───┴────┐         ┌────┴────┐
+        #   [3]      [4]       [5]       [6]  
+        #  ┌─┴─┐   ┌──┴─┐    ┌──┴─┐    ┌──┴─┐
+        # [7] [8] [9] [10] [11] [12] [13] [14]
         g.generate_levels(15)
         self.assertEqual(g.heap_size, 15)
-        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14)])
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6)])
 
+
+        #                   [0]                Nodes [7]..[15] are leaves
+        #           ┌────────┴──────────┐
+        #          [1]                 [2]
+        #       ┌───┴────┐         ┌────┴────┐
+        #      [3]      [4]       [5]       [6]  
+        #     ┌─┴─┐   ┌──┴─┐    ┌──┴─┐    ┌──┴─┐
+        #    [7] [8] [9] [10] [11] [12] [13] [14]
+        #   ┌─┘
+        # [15]
         g.generate_levels(16)
         self.assertEqual(g.heap_size, 16)
-        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14),
-            (15, 15)])
-
-        g.generate_levels(17)
-        self.assertEqual(g.heap_size, 17)
-        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 14),
-            (15, 16)])
-
+        self.assertListEqual(g.levels, [(0, 0), (1, 2), (3, 6), (7, 7)])
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
